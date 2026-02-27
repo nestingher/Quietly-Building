@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aakriti Jain - Quietly Building</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Caveat for Signature, Playfair for headings, Segoe UI for text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@500;600;700&family=Segoe+UI:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-color: #3a332e; /* Dark elegant brown/grey */
+            --accent-color: #5c5046; /* Lighter brown for hovers */
+            --bg-color: #faf8f5; /* Halka sa creamish background */
+            --card-bg: #ffffff; /* Pure white for cards */
+            --text-color: #4a4036; /* Soft dark text */
+            --spotify-green: #1DB954;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--card-bg);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* General Section Layout */
+        .section-container {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 1. TOP PROFILE SECTION */
+        .horizontal-profile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--card-bg);
+            padding: 60px 50px;
+            border-radius: 30px;
+            gap: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            margin-top: 2rem;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .profile-info {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .role-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .profile-desc {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            max-width: 95%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 18px;
+        }
+
+        .social-icons a {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Stylish Image with Signature Overlay */
+        .profile-image-container {
+            flex: 1; 
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Halka sa alag shape (Soft Rounded Rectangle) */
+        .profile-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 100%; /* Alag shape */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+        }
+
+        /* Signature Font Styling - Thoda chhota kiya gaya hai */
+        .signature-overlay {
+            position: absolute;
+            bottom: -50px; 
+            left: 50%;
+            transform: translateX(-50%) rotate(-4deg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 120%;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .hi-im {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+            margin-top: 20px;
+        }
+
+        .signature-name {
+            font-family: 'Caveat', cursive;
+            font-size: 4rem; /* Chhota aur elegant font size */
+            color: var(--primary-color);
+            line-height: 0.7;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9), 
+                        -2px -2px 8px rgba(255, 255, 255, 0.9);
+        }
+
+
+        /* 2. SPOTIFY SECTION - Landscape and wider */
+        .spotify-section {
+            background-color: transparent; /* Creamish bg match karne ke liye */
+            text-align: center;
+            padding: 4rem 5%;
+        }
+
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .spotify-container {
+            max-width: 1050px; /* Breath badha di gayi hai (Wider landscape) */
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            background-color: var(--card-bg);
+            padding: 20px; /* Halka sa frame */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .spotify-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .spotify-fallback {
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+
+        /* 3. NEW BLOG SECTION (1 Image | Text & Button) */
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem; /* Ek upar aur ek niche ke beech gap */
+            max-width: 1050px; /* Spotify ke barabar chauda */
+            margin: 0 auto;
+        }
+
+        .blog-horizontal-card {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.04);
+            height: 300px; /* Fixed height taki image full side le */
+        }
+
+        .blog-horizontal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+
+        /* Left Side: Full Image */
+        .blog-img-container {
+            flex: 0 0 40%; /* Image 40% width legi */
+            height: 100%;
+        }
+
+        .blog-horizontal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Right Side: Content Box */
+        .blog-content-box {
+            flex: 1; /* Baaki 60% jagah lega */
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+        }
+
+        .blog-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        .blog-date {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+
+        .blog-excerpt {
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* 'More' Button */
+        .read-more-btn {
+            align-self: flex-start;
+            padding: 10px 28px;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .read-more-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .horizontal-profile { 
+                flex-direction: column-reverse; 
+                text-align: center;
+                padding: 50px 30px 60px; 
+                gap: 40px;
+            }
+            .profile-desc { margin: 0 auto 30px auto; }
+            .social-icons { justify-content: center; }
+            .profile-img { height: auto; aspect-ratio: 4/5; }
+            
+            /* Responsive Blog Layout */
+            .blog-horizontal-card {
+                flex-direction: column; /* Mobile par image upar, text niche */
+                height: auto;
+            }
+            .blog-img-container {
+                flex: none;
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul { gap: 1rem; font-size: 0.9rem; }
+            .section-container, .spotify-section { padding: 3rem 5%; }
+            .signature-name { font-size: 3.2rem; }
+            .role-title { font-size: 1.8rem; }
+            .hi-im { font-size: 0.8rem; }
+        }
+
+       .social-links {
+  display: flex;
+  gap: 15px;
+  font-size: 1.5rem; /* Adjust icon size here */
+}
+
+.social-links a {
+  color: #555; /* Default icon color */
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effects */
+.social-links a:hover {
+  transform: translateY(-3px);
+}
+
+/* Brand specific hover colors */
+.bi-substack:hover { color: #FF6719; } /* Substack Orange */
+.bi-threads:hover { color: #000000; }      /* Threads Black */
+.bi-spotify:hover { color: #1DB954; }      /* Spotify Green */
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Aakriti.</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#podcast">Podcast</a></li>
+            <li><a href="#blogs">Articles</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. TOP PROFILE SECTION -->
+    <section id="about" class="section-container">
+        <div class="horizontal-profile">
+            
+            <!-- Left Side: Text & Socials -->
+            <div class="profile-info">
+                <h3 class="role-title">Quietly Building</h3>
+                <p class="profile-desc">
+                    Quietly Building is a reflective podcast about work, identity, and the inner life of creating something of your own.<br><br>
+                    Not hustle. Not shortcuts.<br><br>
+                    Just honest conversations about capability, uncertainty, softness, boundaries, and the quiet courage it takes to keep going.
+                </p>
+                
+              <div class="social-links">
+  <a href="https://substack.com/@aakritijain1" aria-label="Substack">
+    <i class="bi bi-substack"></i>
+  </a>
+
+  <a href="https://www.threads.com/@8jainaakriti" aria-label="Threads">
+    <i class="bi bi-threads"></i>
+  </a>
+
+  <a href="https://open.spotify.com/show/3uLW1hFb1oHJHZgneTvZ67?si=6e869519ad924e85" aria-label="Spotify">
+    <i class="bi bi-spotify"></i>
+  </a>
+</div>
+            </div>
+   
+            <!-- Right Side: Image with Overlapping Signature -->
+            <div class="profile-image-container">
+                <!-- Profile Image - Naye shape mein (Rounded Rectangle) -->
+                <img src="Untitled design (1).png" alt="" class="profile-img">
+                
+                <!-- Stylish Signature - Thoda chhota -->
+                <div class="signature-overlay">
+                    <span class="hi-im">HI, I'M</span>
+                    <span class="signature-name">Aakriti Jain!</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 2. SPOTIFY SECTION -->
+    <section id="podcast" class="spotify-section">
+        <h2 class="section-header">Podcast Sunein</h2>
+        <!-- Spotify Container - Landscape and wider -->
+        <div class="spotify-container">
+            <!-- Spotify Player Embed (Adjusted to standard height to encourage list rendering) -->
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/3uLW1hFb1oHJHZgneTvZ67?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            
+            <!-- Fallback Button in case the preview restricts episodes -->
+            <div class="spotify-fallback">
+                <a href="https://open.spotify.com/show/3uLW1hFb1oHJHZgneTvZ67" target="_blank" class="read-more-btn">
+                    <i class="fab fa-spotify"></i> View All Episodes on Spotify
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. NEW BLOG SECTION (Left Image, Right Text) -->
+    <section id="blogs" class="section-container">
+        <h2 class="section-header">Naye Articles</h2>
+        
+        <!-- List container jo ek time par 2 blogs dikhayega (ek upar, ek niche) -->
+        <div class="blog-list">
+            
+            <!-- Blog Card 1 (Upar) -->
+            <div class="blog-horizontal-card">
+                <!-- Left Side: Image -->
+                <div class="blog-img-container">
+                    <img src="blog1.webp" alt="[Image of laptop and notebook]" class="blog-horizontal-image">
+                </div>
+                <!-- Right Side: Content -->
+                <div class="blog-content-box">
+                    <h3 class="blog-title">Before we became parents, we were this.</h3>
+                    <span class="blog-date">Jan 06, 2026</span>
+                    <p class="blog-excerpt">Janiye kyun pehla kadam uthana aksar sabse mushkil hota hai, This picture holds a version of us that feels both familiar and distant now. Not because that love is gone—but because it has grown, stretched, and made room for more.
+
+</p>
+                    <a href="https://aakritijain1.substack.com/p/before-we-became-parents-we-were?utm_source=substack&utm_medium=web&utm_content=embedded-post&triedRedirect=true" class="read-more-btn">More</a>
+                </div>
+            </div>    <!-- Blog Card 2 (Niche) -->
+            <div class="blog-horizontal-card">
+                <!-- Left Side: Image -->
+                <div class="blog-img-container">
+                    <img src="2.webp" alt="" class="blog-horizontal-image">
+                </div>
+                <!-- Right Side: Content -->
+                <div class="blog-content-box">
+                    <h3 class="blog-title">Meet the tiniest human who changed everything  </h3>
+                    <span class="blog-date">Jan 05, 2026</span>
+                    <p class="blog-excerpt">Today, I’m sharing her picture for the first time—and she’s already 6 months old.
+
+Six months of becoming someone new.
+
+Motherhood didn’t arrive gently for me.</p>
+                    <a href="https://aakritijain1.substack.com/p/before-we-became-parents-we-were?utm_source=substack&utm_medium=web&utm_content=embedded-post&triedRedirect=true" class="read-more-btn">More</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Aakriti Jain. Quietly Building.</p>
+    </footer>
+
+</body>
+</html>
