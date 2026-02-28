@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Materium - Gallery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-color: #ffffff;
+            --nav-text: #222222;
+            --accent-color: #9b6c50; /* Studio Materium Copper/Brown */
+            --bg-color: #111111;
+            --nav-bg: #ffffff; /* Navbar ka solid color */
+            --nav-height: 80px; /* Navbar ki fix height */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Jost', sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevent body scroll, wrapper karega scroll */
+            background-color: var(--bg-color);
+        }
+
+        /* * HIGHLIGHTED NAVBAR (Alag section) * */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background-color: var(--nav-bg);
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Navbar ko highlight karne ke liye shadow */
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--nav-text);
+            letter-spacing: 2px;
+        }
+
+        nav .logo span { color: var(--accent-color); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover { color: var(--accent-color); }
+
+        /* * SCROLLING WRAPPER (Navbar ke neeche se start) * */
+        .scrolling-wrapper {
+            position: absolute;
+            top: var(--nav-height); /* Images navbar ke theek neeche se shuru hongi */
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - var(--nav-height)); /* Baaki bachi screen ki height */
+            overflow-y: scroll;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory; /* Ek time par ek image lock karega */
+            scroll-behavior: smooth;
+            
+            /* Hide scrollbar */
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+        
+        .scrolling-wrapper::-webkit-scrollbar {
+            display: none; 
+        }
+
+        /* * ONE IMAGE SECTION * */
+        .one-image-section {
+            width: 100vw;
+            height: calc(100vh - var(--nav-height)); /* Har section screen fit hoga (navbar ki jagah chhod kar) */
+            scroll-snap-align: start; 
+            scroll-snap-stop: always; 
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #f5f5f5; /* Image load hone se pehle ka color */
+        }
+
+        /* The single image covering the section */
+        .one-image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Yahan agar aapko poori screen bharni ho to 'cover' kar sakte hain, abhi 'contain' hai takki image kate nahi */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* * NAVIGATION BUTTONS (Next & Prev) * */
+        .slider-controls {
+            position: fixed;
+            bottom: 40px;
+            right: 5%;
+            z-index: 1010;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background-color: var(--nav-bg);
+            color: var(--nav-text);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .nav-btn { width: 45px; height: 45px; font-size: 1rem; }
+            .slider-controls { bottom: 20px; right: 20px; gap: 10px; }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- HIGHLIGHTED NAVBAR (Alag section) -->
+    <nav>
+        <div class="logo">Aakriti</div>
+        
+    
+        <ul>   <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#podcast">Podcast</a></li>
+            <li><a href="index.html#blogs">Articles</a></li>       
+        
+        </ul>
+        
+    </nav>
+
+    <!-- Floating Next/Prev Buttons -->
+    <div class="slider-controls">
+        <button class="nav-btn" id="prevBtn" title="Previous Image" aria-label="Previous Image">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <button class="nav-btn" id="nextBtn" title="Next Image" aria-label="Next Image">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <!-- The Wrapper that starts BELOW the Navbar. Images will be injected here -->
+    <div class="scrolling-wrapper" id="dynamic-gallery">
+        <!-- Javascript automatically yahan 1 se 127 tak images daal dega -->
+    </div>
+
+    <!-- Script to dynamically generate 1 to 127 images and handle buttons -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const galleryWrapper = document.getElementById("dynamic-gallery");
+            let galleryHTML = "";
+
+            // Loop from 1 to 127
+            for (let i = 1; i <= 127; i++) {
+                galleryHTML += `
+                <!-- ================= IMAGE ${i} ================= -->
+                <section class="one-image-section" id="slide-${i}">
+                    <!-- loading="lazy" bahut zaroori hai takki website fast load ho -->
+                    <img src="sit imag/${i}.jpg" alt="Studio Materium Project ${i}" loading="lazy">
+                </section>
+                `;
+            }
+
+            // Put all 127 sections into the HTML
+            galleryWrapper.innerHTML = galleryHTML;
+
+            // Navigation Button Logic for EXTRA SMOOTH scrolling
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const slides = document.querySelectorAll('.one-image-section');
+            let currentIndex = 0;
+
+            // Track current slide index even if user scrolls manually with mouse/touch
+            let scrollTimeout;
+            galleryWrapper.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(function() {
+                    // Calculate which slide is currently in view
+                    currentIndex = Math.round(galleryWrapper.scrollTop / galleryWrapper.clientHeight);
+                }, 100);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                    // Smoothly slide perfectly to the start of the next section
+                    slides[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+
+            prevBtn.addEventListener('click', function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    // Smoothly slide perfectly to the start of the previous section
+                    slides[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
